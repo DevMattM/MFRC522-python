@@ -27,6 +27,9 @@ import time
 import logging
 
 class MFRC522:
+
+    antenna_gain = 0x06
+
     NRSTPD = 22
 
     MAX_LEN = 16
@@ -409,6 +412,9 @@ class MFRC522:
         self.Write_MFRC522(self.TPrescalerReg, 0x3E)
         self.Write_MFRC522(self.TReloadRegL, 30)
         self.Write_MFRC522(self.TReloadRegH, 0)
+
+        self.Write_MFRC522(0x26, (self.antenna_gain<<4))
+
 
         self.Write_MFRC522(self.TxAutoReg, 0x40)
         self.Write_MFRC522(self.ModeReg, 0x3D)
